@@ -4,9 +4,15 @@ document.addEventListener("DOMContentLoaded", function() {
     const squares = document.querySelectorAll("#board div");
     const status = document.querySelector("#status");
 
+    // Exercise 5: Select the New Game button
+    const newGameButton = document.querySelector(".btn");
+
     // Exercise 2: Keep track of the current player and game board
     let currentPlayer = "X";
     let gameBoard = ["", "", "", "", "", "", "", "", ""];
+
+    // Save the original status message
+    const originalStatus = status.textContent;
 
     // Exercise 4: Define all possible winning combinations
     const winningCombinations = [
@@ -65,23 +71,19 @@ document.addEventListener("DOMContentLoaded", function() {
     // Exercise 4: Check for a winner
     function checkWinner() {
 
-        // Loop through all possible winning combinations
         for (let combination of winningCombinations) {
 
             const [a, b, c] = combination;
 
-            // Check if three squares contain the same symbol
             if (
                 gameBoard[a] !== "" &&
                 gameBoard[a] === gameBoard[b] &&
                 gameBoard[b] === gameBoard[c]
             ) {
 
-                // Display the winner
                 status.textContent = "Congratulations! " +
                     gameBoard[a] + " is the Winner!";
 
-                // Apply the winning style
                 status.classList.add("you-won");
 
                 return true;
@@ -90,5 +92,33 @@ document.addEventListener("DOMContentLoaded", function() {
 
         return false;
     }
+
+    // Exercise 5: Restart the game
+    newGameButton.addEventListener("click", function() {
+
+        // Reset the current player to X
+        currentPlayer = "X";
+
+        // Clear the game board array
+        gameBoard = ["", "", "", "", "", "", "", "", ""];
+
+        // Clear all squares
+        squares.forEach(function(square) {
+
+            // Remove X and O from the square
+            square.textContent = "";
+
+            // Remove player and hover classes
+            square.classList.remove("X", "O", "hover");
+
+        });
+
+        // Restore the original status message
+        status.textContent = originalStatus;
+
+        // Remove the winning style
+        status.classList.remove("you-won");
+
+    });
 
 });
