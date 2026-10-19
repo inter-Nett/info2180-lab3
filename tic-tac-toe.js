@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
         square.classList.add("square");
 
-        // Add a click event to each square
+        // Exercise 2: Add X or O when clicked
         square.addEventListener("click", function() {
 
             // Display the current player's symbol
@@ -33,6 +33,16 @@ document.addEventListener("DOMContentLoaded", function() {
                 currentPlayer = "X";
             }
 
+        });
+
+        // Exercise 3: Add hover effect when mouse enters
+        square.addEventListener("mouseenter", function() {
+            square.classList.add("hover");
+        });
+
+        // Remove hover effect when mouse leaves
+        square.addEventListener("mouseleave", function() {
+            square.classList.remove("hover");
         });
 
     });
